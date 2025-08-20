@@ -10,6 +10,7 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
         :root {
+            /* Cores - Modo Claro */
             --primary: #2c3e50;
             --secondary: #34495e;
             --accent: #3498db;
@@ -20,48 +21,65 @@
             --dark: #2c3e50;
             --text: #333;
             --text-light: #777;
+            --bg: #f5f7fa;
+            --card-bg: #ffffff;
+            --header-bg: #2c3e50;
             --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
             --transition: all 0.3s ease;
         }
-        
+        /* Modo Noturno */
+        .dark-mode {
+            --primary: #1e1e1e;
+            --secondary: #2d2d2d;
+            --accent: #64b5f6;
+            --success: #4caf50;
+            --warning: #ffb300;
+            --danger: #e57373;
+            --light: #2d2d2d;
+            --dark: #121212;
+            --text: #e0e0e0;
+            --text-light: #aaaaaa;
+            --bg: #121212;
+            --card-bg: #1e1e1e;
+            --header-bg: #121212;
+            --shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+        }
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
-        
         body {
             font-family: 'Montserrat', sans-serif;
-            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            background: var(--bg);
             color: var(--text);
             min-height: 100vh;
             padding: 20px;
+            transition: var(--transition);
         }
-        
         .container {
             max-width: 1400px;
             margin: 0 auto;
-            background: white;
+            background: var(--card-bg);
             border-radius: 12px;
             box-shadow: var(--shadow);
             overflow: hidden;
+            transition: var(--transition);
         }
-        
         header {
-            background: var(--primary);
+            background: var(--header-bg);
             color: white;
             padding: 20px 30px;
             display: flex;
             justify-content: space-between;
             align-items: center;
+            transition: var(--transition);
         }
-        
         .logo {
             display: flex;
             align-items: center;
             gap: 15px;
         }
-        
         .logo-icon {
             font-size: 28px;
             background: var(--accent);
@@ -72,23 +90,19 @@
             align-items: center;
             justify-content: center;
         }
-        
         .logo h1 {
             font-weight: 700;
             font-size: 24px;
         }
-        
         .logo span {
             font-weight: 300;
             opacity: 0.9;
         }
-        
         nav ul {
             display: flex;
             list-style: none;
             gap: 25px;
         }
-        
         nav a {
             color: white;
             text-decoration: none;
@@ -98,17 +112,14 @@
             padding: 8px 12px;
             border-radius: 6px;
         }
-        
         nav a:hover, nav a.active {
             background: rgba(255, 255, 255, 0.1);
         }
-        
         .user-actions {
             display: flex;
             align-items: center;
             gap: 15px;
         }
-        
         .btn {
             padding: 10px 20px;
             border: none;
@@ -118,65 +129,57 @@
             transition: var(--transition);
             font-family: 'Montserrat', sans-serif;
         }
-        
         .btn-primary {
             background: var(--accent);
             color: white;
         }
-        
         .btn-primary:hover {
-            background: #2980b9;
+            background: #1976d2;
         }
-        
         .btn-outline {
             background: transparent;
             border: 1px solid white;
             color: white;
         }
-        
         .btn-outline:hover {
             background: rgba(255, 255, 255, 0.1);
         }
-        
         main {
             padding: 30px;
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 30px;
+            transition: var(--transition);
         }
-        
         .card {
-            background: white;
+            background: var(--card-bg);
             border-radius: 10px;
             box-shadow: var(--shadow);
             padding: 25px;
             transition: var(--transition);
         }
-        
         .card:hover {
             transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
         }
-        
         .card-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
             margin-bottom: 20px;
             padding-bottom: 15px;
-            border-bottom: 1px solid #eee;
+            border-bottom: 1px solid #444;
+            transition: var(--transition);
         }
-        
         .card-title {
             font-size: 18px;
             font-weight: 600;
-            color: var(--primary);
+            color: var(--accent);
         }
-        
         .card-icon {
             width: 40px;
             height: 40px;
-            background: var(--light);
+            background: rgba(52, 152, 219, 0.1);
             border-radius: 10px;
             display: flex;
             align-items: center;
@@ -184,9 +187,8 @@
             color: var(--accent);
             font-size: 18px;
         }
-        
         .upload-area {
-            border: 2px dashed #ccc;
+            border: 2px dashed #555;
             border-radius: 8px;
             padding: 30px;
             text-align: center;
@@ -194,264 +196,207 @@
             transition: var(--transition);
             cursor: pointer;
         }
-        
         .upload-area:hover {
             border-color: var(--accent);
         }
-        
         .upload-icon {
             font-size: 48px;
             color: var(--accent);
             margin-bottom: 15px;
         }
-        
         .file-input {
             display: none;
         }
-        
         .file-info {
             background: var(--light);
             padding: 15px;
             border-radius: 8px;
             margin-top: 15px;
             display: none;
+            transition: var(--transition);
         }
-        
         .progress-bar {
             height: 8px;
-            background: #eee;
+            background: #333;
             border-radius: 4px;
             overflow: hidden;
             margin: 15px 0;
         }
-        
         .progress {
             height: 100%;
             background: var(--accent);
             width: 0%;
             transition: width 0.5s ease;
         }
-        
         .filters {
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 15px;
             margin-bottom: 20px;
         }
-        
-        .form-group {
-            margin-bottom: 15px;
-        }
-        
         .form-group label {
-            display: block;
-            margin-bottom: 8px;
-            font-weight: 500;
-            font-size: 14px;
+            color: var(--text);
         }
-        
         .form-control {
             width: 100%;
             padding: 12px 15px;
-            border: 1px solid #ddd;
+            border: 1px solid #555;
             border-radius: 6px;
             font-family: 'Montserrat', sans-serif;
+            background: var(--primary);
+            color: var(--text);
             transition: var(--transition);
         }
-        
         .form-control:focus {
             outline: none;
             border-color: var(--accent);
-            box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.2);
+            box-shadow: 0 0 0 3px rgba(100, 181, 246, 0.2);
         }
-        
         .results {
             margin-top: 30px;
         }
-        
         .result-item {
-            display: flex;
-            justify-content: space-between;
-            padding: 15px;
-            border-radius: 8px;
             background: var(--light);
-            margin-bottom: 10px;
-            align-items: center;
         }
-        
-        .result-info {
-            flex: 1;
-        }
-        
-        .result-actions {
-            display: flex;
-            gap: 10px;
-        }
-        
         .result-item h3 {
-            font-size: 16px;
-            margin-bottom: 5px;
+            color: var(--text);
         }
-        
         .result-item p {
-            font-size: 14px;
             color: var(--text-light);
         }
-        
+        table {
+            border-collapse: collapse;
+            margin-top: 20px;
+            width: 100%;
+        }
+        th, td {
+            padding: 12px 15px;
+            text-align: left;
+            border-bottom: 1px solid #444;
+            color: var(--text);
+        }
+        th {
+            background: var(--primary);
+            font-weight: 600;
+        }
+        tr:hover {
+            background: #2c2c2c;
+        }
         .badge {
             padding: 5px 10px;
             border-radius: 20px;
             font-size: 12px;
             font-weight: 600;
         }
-        
         .badge-success {
             background: var(--success);
             color: white;
         }
-        
         .badge-warning {
             background: var(--warning);
             color: white;
         }
-        
         .badge-danger {
             background: var(--danger);
             color: white;
         }
-        
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 20px;
-        }
-        
-        th, td {
-            padding: 12px 15px;
-            text-align: left;
-            border-bottom: 1px solid #eee;
-        }
-        
-        th {
-            background: var(--light);
-            font-weight: 600;
-        }
-        
-        tr:hover {
-            background: #f9f9f9;
-        }
-        
-        .actions {
-            display: flex;
-            justify-content: flex-end;
-            gap: 15px;
-            margin-top: 30px;
-        }
-        
-        .btn-lg {
-            padding: 12px 25px;
-            font-size: 16px;
-        }
-        
-        .btn-success {
-            background: var(--success);
-            color: white;
-        }
-        
-        .btn-success:hover {
-            background: #27ae60;
-        }
-        
-        footer {
-            background: var(--primary);
-            color: white;
-            padding: 20px 30px;
-            text-align: center;
-            font-size: 14px;
-        }
-        
         .stats {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
             gap: 20px;
             margin-top: 20px;
         }
-        
         .stat-card {
-            background: white;
+            background: var(--primary);
             border-radius: 8px;
             padding: 20px;
             text-align: center;
             box-shadow: var(--shadow);
+            transition: var(--transition);
         }
-        
         .stat-value {
             font-size: 28px;
             font-weight: 700;
             color: var(--accent);
             margin: 10px 0;
         }
-        
         .stat-label {
             font-size: 14px;
             color: var(--text-light);
         }
-        
         .instructions {
-            background: #f8f9fa;
+            background: #1e1e1e;
             border-left: 4px solid var(--accent);
             padding: 15px;
             margin: 20px 0;
             border-radius: 4px;
+            color: var(--text);
         }
-        
         .instructions h3 {
-            margin-bottom: 10px;
-            color: var(--primary);
+            color: var(--accent);
         }
-        
-        .instructions ul {
-            padding-left: 20px;
-            margin-bottom: 10px;
-        }
-        
         .instructions li {
-            margin-bottom: 5px;
+            color: var(--text-light);
         }
-        
         .chart-container {
             position: relative;
             height: 250px;
             width: 100%;
             margin-top: 20px;
         }
-        
         .dashboard-section {
             margin-top: 30px;
             padding-top: 20px;
-            border-top: 1px solid #eee;
+            border-top: 1px solid #444;
         }
-        
         .dashboard-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 20px;
             margin-top: 20px;
         }
-        
         .full-width {
             grid-column: 1 / -1;
         }
-        
+        .theme-toggle {
+            background: none;
+            border: none;
+            font-size: 20px;
+            color: white;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        .theme-toggle:hover {
+            opacity: 0.8;
+        }
+        .no-results {
+            text-align: center;
+            padding: 40px 20px;
+            color: var(--text-light);
+        }
+        .no-results img, .no-results svg {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 15px;
+            opacity: 0.6;
+        }
+        .no-results h4 {
+            font-size: 18px;
+            margin-bottom: 10px;
+            color: var(--text);
+        }
+        .no-results p {
+            font-size: 14px;
+        }
         @media (max-width: 992px) {
             main {
                 grid-template-columns: 1fr;
             }
-            
             .stats {
                 grid-template-columns: 1fr;
             }
-            
             .dashboard-grid {
                 grid-template-columns: 1fr;
             }
@@ -474,11 +419,13 @@
                 </ul>
             </nav>
             <div class="user-actions">
+                <button class="theme-toggle" id="themeToggle">
+                    <span id="themeIcon">🌙</span> Modo Noturno
+                </button>
                 <button class="btn btn-outline">Ajuda</button>
                 <button class="btn btn-primary">Sair</button>
             </div>
         </header>
-        
         <main id="main-content">
             <!-- Conteúdo do Dashboard -->
             <div class="card dashboard-content" id="dashboard-content">
@@ -486,31 +433,26 @@
                     <h2 class="card-title">Visão Geral do Estoque</h2>
                     <div class="card-icon">📊</div>
                 </div>
-                
                 <div class="stats">
                     <div class="stat-card">
                         <div class="stat-label">Total de Itens</div>
                         <div class="stat-value" id="totalItems">0</div>
                     </div>
-                    
                     <div class="stat-card">
                         <div class="stat-label">Itens Desbalanceados</div>
                         <div class="stat-value" id="unbalancedItems">0</div>
                     </div>
-                    
                     <div class="stat-card">
                         <div class="stat-label">Economia Estimada/Mês</div>
                         <div class="stat-value" id="monthlySavings">R$ 0,00</div>
                     </div>
                 </div>
-                
                 <div class="dashboard-section">
                     <h3>Distribuição por Classificação ABC</h3>
                     <div class="chart-container">
                         <canvas id="abcChart"></canvas>
                     </div>
                 </div>
-                
                 <div class="dashboard-section">
                     <h3>Top 5 Itens para Equalização</h3>
                     <table>
@@ -531,14 +473,12 @@
                     </table>
                 </div>
             </div>
-            
             <!-- Conteúdo da Equalização -->
             <div class="card equalizacao-content" id="equalizacao-content" style="display: none;">
                 <div class="card-header">
                     <h2 class="card-title">Importar Dados de Estoque</h2>
-                    <div class="card-icon">📊</div>
+                    <div class="card-icon">📁</div>
                 </div>
-                
                 <div class="instructions">
                     <h3>Instruções de Importação</h3>
                     <p>Certifique-se de que seu arquivo contenha as seguintes colunas:</p>
@@ -550,7 +490,6 @@
                     </ul>
                     <p>Formatos suportados: CSV, XLSX, XLS</p>
                 </div>
-                
                 <div class="upload-area" id="dropZone">
                     <div class="upload-icon">📁</div>
                     <h3>Arraste e solte seu arquivo aqui</h3>
@@ -558,7 +497,6 @@
                     <button class="btn btn-primary" id="browseBtn">Procurar arquivo</button>
                     <input type="file" id="fileInput" class="file-input" accept=".csv, .xlsx, .xls">
                 </div>
-                
                 <div class="file-info" id="fileInfo">
                     <h4>Arquivo selecionado:</h4>
                     <p id="fileName"></p>
@@ -567,7 +505,6 @@
                     </div>
                     <p id="progressText">Processando...</p>
                 </div>
-                
                 <div class="filters">
                     <div class="form-group">
                         <label for="branchFilter">Filtrar por Filial:</label>
@@ -585,92 +522,115 @@
                             <option value="VILHENA">VILHENA</option>
                         </select>
                     </div>
-                    
                     <div class="form-group">
                         <label for="productFilter">Filtrar por Produto:</label>
                         <input type="text" id="productFilter" class="form-control" placeholder="Digite o código ou nome">
                     </div>
                 </div>
-                
+                <!-- Nova Seção: Equalização Personalizada -->
+                <div class="card" style="background: #f9fafa; border: 1px solid #e0e0e0; margin-top: 15px; padding: 20px; border-radius: 8px;">
+                    <h3 style="color: var(--primary); font-size: 16px; font-weight: 600; margin-bottom: 15px;">Equalização Manual entre Filiais</h3>
+                    <div class="filters">
+                        <div class="form-group">
+                            <label for="sourceBranch">Filial de Origem:</label>
+                            <select id="sourceBranch" class="form-control">
+                                <option value="">Selecione a origem</option>
+                                <option value="SÃO LUIS">SÃO LUIS</option>
+                                <option value="BACABAL">BACABAL</option>
+                                <option value="BELÉM">BELÉM</option>
+                                <option value="MACAPÁ">MACAPÁ</option>
+                                <option value="TERESINA">TERESINA</option>
+                                <option value="SINOP">SINOP</option>
+                                <option value="CUIABÁ">CUIABÁ</option>
+                                <option value="RONDONOPOLIS">RONDONOPOLIS</option>
+                                <option value="PORTO VELHO">PORTO VELHO</option>
+                                <option value="VILHENA">VILHENA</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="targetBranch">Filial de Destino:</label>
+                            <select id="targetBranch" class="form-control">
+                                <option value="">Selecione o destino</option>
+                                <option value="SÃO LUIS">SÃO LUIS</option>
+                                <option value="BACABAL">BACABAL</option>
+                                <option value="BELÉM">BELÉM</option>
+                                <option value="MACAPÁ">MACAPÁ</option>
+                                <option value="TERESINA">TERESINA</option>
+                                <option value="SINOP">SINOP</option>
+                                <option value="CUIABÁ">CUIABÁ</option>
+                                <option value="RONDONOPOLIS">RONDONOPOLIS</option>
+                                <option value="PORTO VELHO">PORTO VELHO</option>
+                                <option value="VILHENA">VILHENA</option>
+                            </select>
+                        </div>
+                    </div>
+                    <button class="btn btn-primary" id="manualAnalyzeBtn" style="width: 100%; margin-top: 10px;">Equalizar entre Filiais</button>
+                </div>
                 <button class="btn btn-primary btn-lg" id="analyzeBtn" disabled>Analisar Estoque</button>
             </div>
-            
             <div class="card equalizacao-content" id="equalizacao-results" style="display: none;">
                 <div class="card-header">
                     <h2 class="card-title">Resultados da Equalização</h2>
                     <div class="card-icon">📈</div>
                 </div>
-                
                 <div class="stats">
                     <div class="stat-card">
                         <div class="stat-label">Itens Analisados</div>
                         <div class="stat-value" id="itemsAnalyzed">0</div>
                     </div>
-                    
                     <div class="stat-card">
                         <div class="stat-label">Transferências Sugeridas</div>
                         <div class="stat-value" id="transfersSuggested">0</div>
                     </div>
-                    
                     <div class="stat-card">
                         <div class="stat-label">Economia Estimada</div>
                         <div class="stat-value" id="savingsEstimated">R$ 0,00</div>
                     </div>
                 </div>
-                
                 <div class="results">
                     <h3>Sugestões de Transferência</h3>
-                    
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>Item</th>
-                                <th>Classificação</th>
-                                <th>De</th>
-                                <th>Para</th>
-                                <th>Quantidade</th>
-                                <th>Status</th>
-                            </tr>
-                        </thead>
-                        <tbody id="resultsTable">
-                            <tr>
-                                <td colspan="6" style="text-align: center;">Nenhuma análise realizada ainda</td>
-                            </tr>
-                        </tbody>
-                    </table>
+                    <div id="resultsContainer">
+                        <table id="resultsTable">
+                            <thead>
+                                <tr>
+                                    <th>Item</th>
+                                    <th>Classificação</th>
+                                    <th>De</th>
+                                    <th>Para</th>
+                                    <th>Quantidade</th>
+                                    <th>Status</th>
+                                </tr>
+                            </thead>
+                            <tbody></tbody>
+                        </table>
+                    </div>
                 </div>
-                
                 <div class="actions">
                     <button class="btn" id="exportBtn" disabled>Exportar Relatório</button>
                     <button class="btn btn-success" id="executeBtn" disabled>Executar Transferências</button>
                 </div>
             </div>
-            
             <!-- Conteúdo de Relatórios -->
             <div class="card relatorios-content" id="relatorios-content" style="display: none;">
                 <div class="card-header">
                     <h2 class="card-title">Relatórios e Estatísticas</h2>
                     <div class="card-icon">📋</div>
                 </div>
-                
                 <div class="dashboard-grid">
                     <div class="stat-card">
                         <div class="stat-label">Total de Filiais</div>
                         <div class="stat-value" id="totalBranches">10</div>
                     </div>
-                    
                     <div class="stat-card">
                         <div class="stat-label">Itens com Classificação D</div>
                         <div class="stat-value" id="totalDItems">0</div>
                     </div>
-                    
                     <div class="stat-card full-width">
                         <h3>Distribuição de Estoque por Filial</h3>
                         <div class="chart-container">
                             <canvas id="branchChart"></canvas>
                         </div>
                     </div>
-                    
                     <div class="stat-card full-width">
                         <h3>Evolução de Equalizações</h3>
                         <div class="chart-container">
@@ -679,52 +639,72 @@
                     </div>
                 </div>
             </div>
-            
             <!-- Conteúdo de Configurações -->
             <div class="card configuracoes-content" id="configuracoes-content" style="display: none;">
                 <div class="card-header">
                     <h2 class="card-title">Configurações do Sistema</h2>
                     <div class="card-icon">⚙️</div>
                 </div>
-                
                 <div class="form-group">
                     <label for="systemName">Nome do Sistema:</label>
                     <input type="text" id="systemName" class="form-control" value="StockBalance Pro">
                 </div>
-                
                 <div class="form-group">
                     <label for="adminEmail">Email do Administrador:</label>
                     <input type="email" id="adminEmail" class="form-control" value="admin@empresa.com">
                 </div>
-                
                 <div class="form-group">
                     <label for="autoRefresh">Atualização Automática (minutos):</label>
                     <input type="number" id="autoRefresh" class="form-control" value="15" min="5" max="60">
                 </div>
-                
                 <div class="form-group">
                     <label for="criticalLevel">Nível Crítico de Estoque (%):</label>
                     <input type="number" id="criticalLevel" class="form-control" value="10" min="1" max="50">
-                </div<div class="form-group">
+                </div>
+                <div class="form-group">
                     <label for="excessLevel">Nível de Excesso de Estoque (%):</label>
                     <input type="number" id="excessLevel" class="form-control" value="150" min="101" max="300">
                 </div>
-                
                 <div class="actions">
                     <button class="btn btn-primary" id="saveSettings">Salvar Configurações</button>
                     <button class="btn btn-outline">Restaurar Padrões</button>
                 </div>
             </div>
         </main>
-        
         <footer>
-            <p>StockBalance Pro © 2025 - Sistema Equalização de Estoque criado por Pabricio lima</p>
+            <p>StockBalance Pro © 2025 - Sistema Equalização de Estoque criado por Pabricio Lima</p>
         </footer>
     </div>
-    
+
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            // Elementos da interface
+            const themeToggle = document.getElementById('themeToggle');
+            const themeIcon = document.getElementById('themeIcon');
+            const body = document.body;
+
+            // Verificar preferência do usuário
+            const isDarkMode = localStorage.getItem('darkMode') === 'true';
+            if (isDarkMode) {
+                body.classList.add('dark-mode');
+                themeIcon.textContent = '☀️';
+                themeToggle.innerHTML = '<span id="themeIcon">☀️</span> Modo Claro';
+            }
+
+            // Alternar tema
+            themeToggle.addEventListener('click', () => {
+                body.classList.toggle('dark-mode');
+                if (body.classList.contains('dark-mode')) {
+                    localStorage.setItem('darkMode', 'true');
+                    themeIcon.textContent = '☀️';
+                    themeToggle.innerHTML = '<span id="themeIcon">☀️</span> Modo Claro';
+                } else {
+                    localStorage.setItem('darkMode', 'false');
+                    themeIcon.textContent = '🌙';
+                    themeToggle.innerHTML = '<span id="themeIcon">🌙</span> Modo Noturno';
+                }
+            });
+
+            // Elementos do DOM
             const dropZone = document.getElementById('dropZone');
             const fileInput = document.getElementById('fileInput');
             const browseBtn = document.getElementById('browseBtn');
@@ -735,7 +715,7 @@
             const analyzeBtn = document.getElementById('analyzeBtn');
             const exportBtn = document.getElementById('exportBtn');
             const executeBtn = document.getElementById('executeBtn');
-            const resultsTable = document.getElementById('resultsTable');
+            const resultsTable = document.getElementById('resultsTable').querySelector('tbody');
             const itemsAnalyzed = document.getElementById('itemsAnalyzed');
             const transfersSuggested = document.getElementById('transfersSuggested');
             const savingsEstimated = document.getElementById('savingsEstimated');
@@ -745,9 +725,12 @@
             const totalDItems = document.getElementById('totalDItems');
             const topItemsTable = document.getElementById('topItemsTable');
             const saveSettings = document.getElementById('saveSettings');
-            
-            // Navegação por abas
             const navLinks = document.querySelectorAll('nav a');
+
+            const sourceBranch = document.getElementById('sourceBranch');
+            const targetBranch = document.getElementById('targetBranch');
+            const manualAnalyzeBtn = document.getElementById('manualAnalyzeBtn');
+
             const contentSections = {
                 'dashboard': document.getElementById('dashboard-content'),
                 'equalizacao': document.getElementById('equalizacao-content'),
@@ -755,186 +738,211 @@
                 'relatorios': document.getElementById('relatorios-content'),
                 'configuracoes': document.getElementById('configuracoes-content')
             };
-            
-            // Dados do sistema
+
             let processedData = [];
             let transferSuggestions = [];
-            let abcChart, branchChart, historyChart;
-            
+
             // Inicializar gráficos
             initCharts();
-            
-            // Event listeners
-            browseBtn.addEventListener('click', () => {
-                fileInput.click();
-            });
-            
+
+            // Eventos
+            browseBtn.addEventListener('click', () => fileInput.click());
             fileInput.addEventListener('change', handleFileSelect);
-            
+
             dropZone.addEventListener('dragover', (e) => {
                 e.preventDefault();
                 dropZone.style.borderColor = '#3498db';
             });
-            
             dropZone.addEventListener('dragleave', () => {
                 dropZone.style.borderColor = '#ccc';
             });
-            
             dropZone.addEventListener('drop', (e) => {
                 e.preventDefault();
                 dropZone.style.borderColor = '#ccc';
-                
                 if (e.dataTransfer.files.length) {
                     fileInput.files = e.dataTransfer.files;
                     handleFileSelect({ target: fileInput });
                 }
             });
-            
+
             analyzeBtn.addEventListener('click', analyzeStock);
             exportBtn.addEventListener('click', exportResults);
             saveSettings.addEventListener('click', saveSystemSettings);
-            
-            // Navegação por abas
+
+            // Navegação
             navLinks.forEach(link => {
                 link.addEventListener('click', (e) => {
                     e.preventDefault();
                     const tab = link.getAttribute('data-tab');
-                    
-                    // Ativar link
                     navLinks.forEach(navLink => navLink.classList.remove('active'));
                     link.classList.add('active');
-                    
-                    // Mostrar conteúdo correspondente
                     Object.keys(contentSections).forEach(key => {
-                        if (key === tab || key.startsWith(tab)) {
-                            contentSections[key].style.display = 'block';
-                        } else {
-                            contentSections[key].style.display = 'none';
-                        }
+                        contentSections[key].style.display = key.startsWith(tab) ? 'block' : 'none';
                     });
-                    
-                    // Caso especial para equalização (duas seções)
-                    if (tab === 'equalizacao') {
-                        contentSections['equalizacao-results'].style.display = 'block';
-                    }
                 });
             });
-            
-            // Functions
-            function initCharts() {
-                // Gráfico de distribuição ABC
-                const abcCtx = document.getElementById('abcChart').getContext('2d');
-                abcChart = new Chart(abcCtx, {
-                    type: 'doughnut',
-                    data: {
-                        labels: ['Classe A', 'Classe B', 'Classe C', 'Classe D'],
-                        datasets: [{
-                            data: [25, 25, 25, 25],
-                            backgroundColor: [
-                                '#3498db',
-                                '#2ecc71',
-                                '#f39c12',
-                                '#e74c3c'
-                            ]
-                        }]
-                    },
-                    options: {
-                        responsive: true,
-                        maintainAspectRatio: false,
-                        plugins: {
-                            legend: {
-                                position: 'bottom'
-                            }
-                        }
+
+            // Botão de equalização manual
+            manualAnalyzeBtn.addEventListener('click', () => {
+                const origin = sourceBranch.value;
+                const destination = targetBranch.value;
+
+                if (!origin || !destination) {
+                    alert('Por favor, selecione ambas as filiais: origem e destino.');
+                    return;
+                }
+                if (origin === destination) {
+                    alert('A filial de origem e destino não podem ser iguais.');
+                    return;
+                }
+
+                fileInfo.style.display = 'block';
+                progressBar.style.width = '0%';
+                progressText.textContent = `Analisando ${origin} → ${destination}... 0%`;
+
+                let progress = 0;
+                const interval = setInterval(() => {
+                    progress += 10;
+                    progressBar.style.width = `${progress}%`;
+                    progressText.textContent = `Analisando ${origin} → ${destination}... ${progress}%`;
+                    if (progress >= 100) {
+                        clearInterval(interval);
+                        progressText.textContent = 'Análise concluída!';
+                        analyzeBetweenBranches(origin, destination);
+                    }
+                }, 150);
+            });
+
+            // Função principal de análise entre duas filiais
+            function analyzeBetweenBranches(origin, destination) {
+                transferSuggestions = [];
+                const originItems = {};
+                const destItems = {};
+
+                // Filtrar itens por filial
+                processedData.forEach(item => {
+                    const empresa = item.Empresa;
+                    const code = item.Item || item['Item Publico'];
+                    const abc = item.ABC || '';
+                    const quantidade = parseInt(item['Qtd. Contabil'] || 0);
+                    const descricao = item['Item Publico'] || '';
+
+                    if (empresa === origin && abc === 'D') {
+                        originItems[code] = { quantidade, descricao, abc };
+                    }
+                    if (empresa === destination && ['A', 'B', 'C'].includes(abc)) {
+                        destItems[code] = { quantidade, descricao, abc };
                     }
                 });
-                
-                // Gráfico de distribuição por filial
-                const branchCtx = document.getElementById('branchChart').getContext('2d');
-                branchChart = new Chart(branchCtx, {
-                    type: 'bar',
-                    data: {
-                        labels: ['SÃO LUIS', 'BACABAL', 'BELÉM', 'MACAPÁ', 'TERESINA', 'SINOP', 'CUIABÁ', 'RONDONOPOLIS', 'PORTO VELHO', 'VILHENA'],
-                        datasets: [{
-                            label: 'Quantidade de Itens',
-                            data: [100, 85, 120, 75, 90, 60, 80, 70, 65, 55],
-                            backgroundColor: '#3498db'
-                        }]
-                    },
-                    options: {
-                        responsive: true,
-                        maintainAspectRatio: false,
-                        scales: {
-                            y: {
-                                beginAtZero: true
-                            }
+
+                // Comparar e sugerir transferências
+                for (const code in originItems) {
+                    if (destItems[code]) {
+                        const donor = originItems[code];
+                        const recipient = destItems[code];
+                        const transferQty = Math.min(donor.quantidade, Math.ceil(donor.quantidade * 0.7)); // 70% do excedente
+
+                        if (transferQty > 0) {
+                            transferSuggestions.push({
+                                item: code,
+                                descricao: donor.descricao,
+                                abc: `${donor.abc} → ${recipient.abc}`,
+                                from: origin,
+                                to: destination,
+                                quantity: transferQty,
+                                status: 'Sugerido',
+                                priority: recipient.abc === 'A' ? 'Alta' : recipient.abc === 'B' ? 'Média' : 'Baixa'
+                            });
                         }
                     }
-                });
-                
-                // Gráfico histórico
-                const historyCtx = document.getElementById('historyChart').getContext('2d');
-                historyChart = new Chart(historyCtx, {
-                    type: 'line',
-                    data: {
-                        labels: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez'],
-                        datasets: [{
-                            label: 'Transferências Realizadas',
-                            data: [12, 19, 8, 15, 22, 18, 25, 12, 16, 20, 22, 18],
-                            borderColor: '#3498db',
-                            tension: 0.1,
-                            fill: false
-                        }]
-                    },
-                    options: {
-                        responsive: true,
-                        maintainAspectRatio: false,
-                        scales: {
-                            y: {
-                                beginAtZero: true
-                            }
-                        }
-                    }
+                }
+
+                // Atualizar resultados
+                displayResults();
+                itemsAnalyzed.textContent = Object.keys(originItems).length + Object.keys(destItems).length;
+                transfersSuggested.textContent = transferSuggestions.length;
+                savingsEstimated.textContent = calculateSavings();
+                exportBtn.disabled = transferSuggestions.length === 0;
+                executeBtn.disabled = transferSuggestions.length === 0;
+
+                updateDashboard();
+            }
+
+            function displayResults() {
+                resultsTable.innerHTML = '';
+                if (transferSuggestions.length === 0) {
+                    resultsTable.innerHTML = `
+                        <tr>
+                            <td colspan="6">
+                                <div class="no-results">
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:60px;height:60px;margin:0 auto 15px;display:block;opacity:0.3;">
+                                        <circle cx="12" cy="12" r="10"></circle>
+                                        <line x1="12" y1="8" x2="12" y2="12"></line>
+                                        <line x1="12" y1="16" x2="12.01" y2="16"></line>
+                                    </svg>
+                                    <h4>Nenhuma transferência possível</h4>
+                                    <p>Não foram encontrados itens em classe D na filial de origem compatíveis com a filial de destino.</p>
+                                </div>
+                            </td>
+                        </tr>
+                    `;
+                    return;
+                }
+
+                transferSuggestions.forEach(suggestion => {
+                    const row = document.createElement('tr');
+                    row.innerHTML = `
+                        <td>${suggestion.item}<br><small>${suggestion.descricao}</small></td>
+                        <td>${suggestion.abc}</td>
+                        <td>${suggestion.from}</td>
+                        <td>${suggestion.to}</td>
+                        <td>${suggestion.quantity}</td>
+                        <td><span class="badge badge-warning">${suggestion.status}</span></td>
+                    `;
+                    resultsTable.appendChild(row);
                 });
             }
-            
+
+            function calculateSavings() {
+                let estimatedSaving = 0;
+                transferSuggestions.forEach(suggestion => {
+                    if (suggestion.priority === 'Alta') estimatedSaving += 2000;
+                    else if (suggestion.priority === 'Média') estimatedSaving += 1250;
+                    else estimatedSaving += 750;
+                });
+                return `R$ ${estimatedSaving.toLocaleString('pt-BR')},00`;
+            }
+
             function handleFileSelect(event) {
                 const file = event.target.files[0];
                 if (!file) return;
-                
                 fileName.textContent = file.name;
                 fileInfo.style.display = 'block';
-                
-                // Simulate file processing
+                progressBar.style.width = '0%';
+                progressText.textContent = 'Processando... 0%';
+
                 let progress = 0;
                 const interval = setInterval(() => {
                     progress += 5;
                     progressBar.style.width = `${progress}%`;
                     progressText.textContent = `Processando... ${progress}%`;
-                    
                     if (progress >= 100) {
                         clearInterval(interval);
-                        
-                        // Process the actual file
-                        processFile(file)
-                            .then(() => {
-                                progressText.textContent = 'Arquivo processado com sucesso!';
-                                analyzeBtn.disabled = false;
-                                updateDashboard();
-                            })
-                            .catch(error => {
-                                progressText.textContent = 'Erro ao processar arquivo: ' + error.message;
-                                progressBar.style.background = '#e74c3c';
-                            });
+                        processFile(file).then(() => {
+                            progressText.textContent = 'Arquivo processado com sucesso!';
+                            analyzeBtn.disabled = false;
+                            updateDashboard();
+                        }).catch(error => {
+                            progressText.textContent = 'Erro ao processar arquivo: ' + error.message;
+                            progressBar.style.background = '#e74c3c';
+                        });
                     }
                 }, 100);
             }
-            
+
             function processFile(file) {
-                return new Promise((resolve, reject) => {
-                    const extension = file.name.split('.').pop().toLowerCase();
-                    
-                    // Para demonstração, vamos usar dados de exemplo
+                return new Promise((resolve) => {
+                    // Simulação de dados grandes
                     processedData = [
                         { Empresa: 'SÃO LUIS', Item: '2T0455955', 'Item Publico': 'CURVA A', ABC: 'A', 'Qtd. Contabil': '12' },
                         { Empresa: 'BACABAL', Item: '2T0455955', 'Item Publico': 'CURVA B', ABC: 'B', 'Qtd. Contabil': '8' },
@@ -945,94 +953,64 @@
                         { Empresa: 'CUIABÁ', Item: '3T0789123', 'Item Publico': 'SUPORTE LINEAR', ABC: 'C', 'Qtd. Contabil': '8' },
                         { Empresa: 'RONDONOPOLIS', Item: '4R0567128', 'Item Publico': 'JUNTA T', ABC: 'B', 'Qtd. Contabil': '50' },
                         { Empresa: 'PORTO VELHO', Item: '4R0567128', 'Item Publico': 'JUNTA ROSC', ABC: 'A', 'Qtd. Contabil': '15' },
-                        { Empresa: 'VILHENA', Item: '4R0567128', 'Item Publico': 'JUNTA D', ABC: 'D', 'Qtd. Contabil': '32' }
+                        { Empresa: 'VILHENA', Item: '4R0567128', 'Item Publico': 'JUNTA D', ABC: 'D', 'Qtd. Contabil': '32' },
+                        { Empresa: 'SÃO LUIS', Item: '5X1234567', 'Item Publico': 'ROLAMENTO XYZ', ABC: 'D', 'Qtd. Contabil': '100' },
+                        { Empresa: 'BACABAL', Item: '5X1234567', 'Item Publico': 'ROLAMENTO XYZ', ABC: 'A', 'Qtd. Contabil': '5' },
                     ];
-                    
                     resolve();
                 });
             }
-            
+
             function analyzeStock() {
                 if (processedData.length === 0) {
                     alert('Por favor, importe os dados primeiro.');
                     return;
                 }
-                
-                // Reset previous results
                 transferSuggestions = [];
-                
-                // Simulate analysis
                 let progress = 0;
                 const interval = setInterval(() => {
                     progress += 10;
                     progressBar.style.width = `${progress}%`;
                     progressText.textContent = `Analisando estoque... ${progress}%`;
-                    
                     if (progress >= 100) {
                         clearInterval(interval);
                         progressText.textContent = 'Análise concluída!';
-                        
-                        // Perform actual analysis
                         performAnalysis();
-                        
-                        // Update stats
                         itemsAnalyzed.textContent = processedData.length;
                         transfersSuggested.textContent = transferSuggestions.length;
                         savingsEstimated.textContent = calculateSavings();
-                        
-                        // Enable buttons
                         exportBtn.disabled = false;
                         executeBtn.disabled = false;
-                        
-                        // Display results
                         displayResults();
                         updateDashboard();
                     }
                 }, 200);
             }
-            
+
             function performAnalysis() {
-                // Group items by product code
                 const itemsByCode = {};
-                
                 processedData.forEach(item => {
                     const code = item.Item || item['Item Publico'] || '';
                     if (!code) return;
-                    
-                    if (!itemsByCode[code]) {
-                        itemsByCode[code] = [];
-                    }
-                    
+                    if (!itemsByCode[code]) itemsByCode[code] = [];
                     itemsByCode[code].push({
                         empresa: item.Empresa || '',
                         abc: item.ABC || '',
-                        quantidade: parseInt(item['Qtd. Contabil'] || item['Qtd. Disponível'] || 0),
+                        quantidade: parseInt(item['Qtd. Contabil'] || 0),
                         descricao: item['Item Publico'] || ''
                     });
                 });
-                
-                // Find items with different ABC classifications
+
                 for (const code in itemsByCode) {
                     const items = itemsByCode[code];
-                    
-                    if (items.length < 2) continue; // Skip if only one location
-                    
-                    // Check if items have different ABC classifications
+                    if (items.length < 2) continue;
                     const abcClassifications = [...new Set(items.map(item => item.abc))];
-                    
                     if (abcClassifications.length > 1) {
-                        // Find items with classification D (donors)
                         const donors = items.filter(item => item.abc === 'D');
-                        
-                        // Find items with classifications A, B or C (recipients)
                         const recipients = items.filter(item => item.abc !== 'D');
-                        
-                        // Create transfer suggestions from D to A/B/C
                         donors.forEach(donor => {
                             recipients.forEach(recipient => {
-                                // Calculate transfer quantity (half the difference)
                                 const transferQty = Math.floor((donor.quantidade - recipient.quantidade) / 2);
-                                
                                 if (transferQty > 0) {
                                     transferSuggestions.push({
                                         item: code,
@@ -1049,121 +1027,58 @@
                         });
                     }
                 }
-                
-                // Sort by priority (A first, then B, then C)
+
                 transferSuggestions.sort((a, b) => {
                     const priorityOrder = { 'Alta': 1, 'Média': 2, 'Baixa': 3 };
                     return priorityOrder[a.priority] - priorityOrder[b.priority];
                 });
             }
-            
-            function calculateSavings() {
-                // Simple calculation based on number of transfers and priority
-                let estimatedSaving = 0;
-                transferSuggestions.forEach(suggestion => {
-                    if (suggestion.priority === 'Alta') estimatedSaving += 2000;
-                    else if (suggestion.priority === 'Média') estimatedSaving += 1250;
-                    else estimatedSaving += 750;
-                });
-                return `R$ ${estimatedSaving.toLocaleString('pt-BR')},00`;
-            }
-            
-            function displayResults() {
-                // Clear table
-                resultsTable.innerHTML = '';
-                
-                if (transferSuggestions.length === 0) {
-                    const row = document.createElement('tr');
-                    row.innerHTML = `<td colspan="6" style="text-align: center;">Nenhuma transferência sugerida</td>`;
-                    resultsTable.appendChild(row);
-                    return;
-                }
-                
-                // Add results to table
-                transferSuggestions.forEach(result => {
-                    const row = document.createElement('tr');
-                    
-                    row.innerHTML = `
-                        <td>${result.item}<br><small>${result.descricao}</small></td>
-                        <td>${result.abc}</td>
-                        <td>${result.from}</td>
-                        <td>${result.to}</td>
-                        <td>${result.quantity}</td>
-                        <td><span class="badge badge-warning">${result.status}</span></td>
-                    `;
-                    
-                    resultsTable.appendChild(row);
-                });
-            }
-            
+
             function updateDashboard() {
-                // Update main stats
                 totalItems.textContent = processedData.length;
-                
-                // Count unbalanced items (items with different ABC classifications)
                 const itemsByCode = {};
                 processedData.forEach(item => {
                     const code = item.Item || item['Item Publico'] || '';
                     if (!code) return;
-                    
-                    if (!itemsByCode[code]) {
-                        itemsByCode[code] = new Set();
-                    }
-                    
+                    if (!itemsByCode[code]) itemsByCode[code] = new Set();
                     itemsByCode[code].add(item.ABC);
                 });
-                
+
                 let unbalancedCount = 0;
                 let dItemsCount = 0;
-                
                 for (const code in itemsByCode) {
-                    if (itemsByCode[code].size > 1) {
-                        unbalancedCount++;
-                    }
-                    if (itemsByCode[code].has('D')) {
-                        dItemsCount++;
-                    }
+                    if (itemsByCode[code].size > 1) unbalancedCount++;
+                    if (itemsByCode[code].has('D')) dItemsCount++;
                 }
-                
+
                 unbalancedItems.textContent = unbalancedCount;
                 totalDItems.textContent = dItemsCount;
-                
-                // Update ABC chart
+
                 const abcCount = { A: 0, B: 0, C: 0, D: 0 };
                 processedData.forEach(item => {
-                    if (abcCount.hasOwnProperty(item.ABC)) {
-                        abcCount[item.ABC]++;
-                    }
+                    if (abcCount.hasOwnProperty(item.ABC)) abcCount[item.ABC]++;
                 });
-                
+
                 abcChart.data.datasets[0].data = [abcCount.A, abcCount.B, abcCount.C, abcCount.D];
                 abcChart.update();
-                
-                // Update monthly savings
+
                 const saving = parseInt(unbalancedCount * 1250);
                 monthlySavings.textContent = `R$ ${saving.toLocaleString('pt-BR')},00`;
-                
-                // Update top items table
+
                 updateTopItemsTable();
             }
-            
+
             function updateTopItemsTable() {
-                // Clear table
                 topItemsTable.innerHTML = '';
-                
                 if (transferSuggestions.length === 0) {
                     const row = document.createElement('tr');
                     row.innerHTML = `<td colspan="5" style="text-align: center;">Nenhuma transferência sugerida</td>`;
                     topItemsTable.appendChild(row);
                     return;
                 }
-                
-                // Add top 5 items to table
                 const topItems = transferSuggestions.slice(0, 5);
-                
                 topItems.forEach(item => {
                     const row = document.createElement('tr');
-                    
                     row.innerHTML = `
                         <td>${item.item}</td>
                         <td>${item.from}</td>
@@ -1171,50 +1086,210 @@
                         <td>${item.quantity}</td>
                         <td><span class="badge ${item.priority === 'Alta' ? 'badge-danger' : item.priority === 'Média' ? 'badge-warning' : 'badge-success'}">${item.priority}</span></td>
                     `;
-                    
                     topItemsTable.appendChild(row);
                 });
             }
-            
+
             function exportResults() {
                 if (transferSuggestions.length === 0) {
                     alert('Nenhum resultado para exportar.');
                     return;
                 }
-                
-                // Create CSV content
-                let csvContent = "Item,Descrição,Classificação ABC,De,Para,Quantidade,Status,Prioridade\n";
-                
-                transferSuggestions.forEach(item => {
-                    csvContent += `"${item.item}","${item.descricao}","${item.abc}","${item.from}","${item.to}",${item.quantity},${item.status},${item.priority}\n`;
+                const COLORS = {
+                    headerBg: '2c3e50',
+                    headerText: 'FFFFFF',
+                    subHeaderBg: '34495e',
+                    subHeaderText: 'ecf0f1',
+                    altRow: 'f8f9fa',
+                    borderColor: 'bdc3c7',
+                    priority: {
+                        Alta: 'c0392b',
+                        Média: 'f39c12',
+                        Baixa: '27ae60'
+                    }
+                };
+                const now = new Date();
+                const formattedDate = now.toLocaleDateString('pt-BR');
+                const formattedTime = now.toLocaleTimeString('pt-BR');
+
+                const data = [
+                    ['STOCKBALANCE PRO'],
+                    [`Relatório de Equalização de Estoque`],
+                    [``],
+                    [`Data de Geração: ${formattedDate} às ${formattedTime}`],
+                    [`Analista: Sistema Automático`],
+                    [``],
+                    [
+                        'Item',
+                        'Descrição do Produto',
+                        'Classe Origem → Destino',
+                        'Filial Origem',
+                        'Filial Destino',
+                        'Qtd. Transferência',
+                        'Status',
+                        'Prioridade'
+                    ]
+                ];
+
+                transferSuggestions.forEach(suggestion => {
+                    data.push([
+                        suggestion.item,
+                        suggestion.descricao,
+                        suggestion.abc,
+                        suggestion.from,
+                        suggestion.to,
+                        suggestion.quantity,
+                        suggestion.status,
+                        suggestion.priority
+                    ]);
                 });
-                
-                // Create download link
-                const encodedUri = encodeURI("data:text/csv;charset=utf-8," + csvContent);
-                const link = document.createElement("a");
-                link.setAttribute("href", encodedUri);
-                link.setAttribute("download", "sugestoes_equalizacao.csv");
-                document.body.appendChild(link);
-                
-                // Trigger download
-                link.click();
-                document.body.removeChild(link);
+
+                data.push([``, ``, ``, ``, ``, ``, ``, ``]);
+                data.push([
+                    ``, ``, ``, ``, ``, 
+                    `Total: ${transferSuggestions.length} transferências`, ``, ``
+                ]);
+
+                const ws = XLSX.utils.aoa_to_sheet(data);
+                const wb = XLSX.utils.book_new();
+
+                ws['!merges'] = [
+                    { s: { r: 0, c: 0 }, e: { r: 0, c: 7 } },
+                    { s: { r: 1, c: 0 }, e: { r: 1, c: 7 } },
+                    { s: { r: 4, c: 0 }, e: { r: 4, c: 7 } },
+                    { s: { r: data.length - 2, c: 0 }, e: { r: data.length - 2, c: 7 } },
+                    { s: { r: data.length - 1, c: 0 }, e: { r: data.length - 1, c: 5 } }
+                ];
+
+                ws['!cols'] = [
+                    { wch: 16 }, { wch: 30 }, { wch: 20 }, { wch: 18 },
+                    { wch: 18 }, { wch: 14 }, { wch: 12 }, { wch: 12 }
+                ];
+
+                const applyStyle = (cell, style) => {
+                    if (!ws[cell]) ws[cell] = {};
+                    ws[cell].s = style;
+                };
+
+                applyStyle('A1', {
+                    font: { sz: 20, bold: true, color: { rgb: COLORS.headerText } },
+                    fill: { fgColor: { rgb: COLORS.headerBg } },
+                    alignment: { horizontal: 'center', vertical: 'center' },
+                    border: { bottom: { style: 'double', color: { rgb: COLORS.borderColor } } }
+                });
+
+                applyStyle('A2', {
+                    font: { sz: 12, bold: true, color: { rgb: COLORS.subHeaderText } },
+                    fill: { fgColor: { rgb: COLORS.subHeaderBg } },
+                    alignment: { horizontal: 'center', vertical: 'center' },
+                    border: { bottom: { style: 'thin', color: { rgb: COLORS.borderColor } } }
+                });
+
+                ['A4', 'A5'].forEach(cell => {
+                    applyStyle(cell, {
+                        font: { sz: 10, color: { rgb: '7f8c8d' } },
+                        fill: { fgColor: { rgb: 'ecf0f1' } },
+                        alignment: { horizontal: 'left' }
+                    });
+                });
+
+                for (let c = 0; c < 8; c++) {
+                    const cell = XLSX.utils.encode_cell({ r: 6, c });
+                    applyStyle(cell, {
+                        font: { sz: 11, bold: true, color: { rgb: COLORS.headerText } },
+                        fill: { fgColor: { rgb: COLORS.headerBg } },
+                        alignment: { horizontal: 'center', vertical: 'center' },
+                        border: {
+                            top: { style: 'thin', color: { rgb: COLORS.borderColor } },
+                            bottom: { style: 'medium', color: { rgb: COLORS.borderColor } },
+                            left: { style: 'thin', color: { rgb: COLORS.borderColor } },
+                            right: { style: 'thin', color: { rgb: COLORS.borderColor } }
+                        }
+                    });
+                }
+
+                for (let r = 7; r < data.length - 2; r++) {
+                    const isEven = (r - 7) % 2 === 0;
+                    const bgColor = isEven ? 'ffffff' : COLORS.altRow;
+                    for (let c = 0; c < 8; c++) {
+                        const cell = XLSX.utils.encode_cell({ r, c });
+                        if (!ws[cell]) continue;
+                        let fontColor = '333333';
+                        let alignment = 'center';
+                        let bold = false;
+                        if (c === 1) alignment = 'left';
+                        if (c === 7) {
+                            const priority = ws[cell].v;
+                            fontColor = 'FFFFFF';
+                            bold = true;
+                        }
+                        applyStyle(cell, {
+                            font: { sz: 10, color: { rgb: fontColor }, bold },
+                            fill: { fgColor: { rgb: bgColor } },
+                            alignment: { vertical: 'center', horizontal: alignment },
+                            border: { bottom: { style: 'hair', color: { rgb: 'bdc3c7' } } }
+                        });
+                    }
+
+                    const priorityCell = XLSX.utils.encode_cell({ r, c: 7 });
+                    const priority = ws[priorityCell]?.v;
+                    if (priority && COLORS.priority[priority]) {
+                        applyStyle(priorityCell, {
+                            font: { sz: 10, bold: true, color: { rgb: 'FFFFFF' } },
+                            fill: { fgColor: { rgb: COLORS.priority[priority] } },
+                            alignment: { horizontal: 'center' },
+                            border: { bottom: { style: 'hair', color: { rgb: 'bdc3c7' } } }
+                        });
+                    }
+                }
+
+                const totalRow = data.length - 1;
+                applyStyle(XLSX.utils.encode_cell({ r: totalRow, c: 5 }), {
+                    font: { sz: 11, bold: true, color: { rgb: '2c3e50' } },
+                    fill: { fgColor: { rgb: 'ecf0f1' } },
+                    alignment: { horizontal: 'right' }
+                });
+
+                XLSX.utils.book_append_sheet(wb, ws, 'Equalização de Estoque');
+                XLSX.writeFile(wb, `StockBalance_Pro_Equalizacao_${formattedDate.replace(/\//g, '-')}.xlsx`);
             }
-            
+
             function saveSystemSettings() {
                 alert('Configurações salvas com sucesso!');
             }
-            
-            // Initialize with sample data for demonstration
+
+            function initCharts() {
+                const abcCtx = document.getElementById('abcChart').getContext('2d');
+                abcChart = new Chart(abcCtx, {
+                    type: 'doughnut',
+                    data: { labels: ['Classe A', 'Classe B', 'Classe C', 'Classe D'], datasets: [{ data: [25, 25, 25, 25], backgroundColor: ['#3498db', '#2ecc71', '#f39c12', '#e74c3c'] }] },
+                    options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { position: 'bottom' } } }
+                });
+
+                const branchCtx = document.getElementById('branchChart').getContext('2d');
+                branchChart = new Chart(branchCtx, {
+                    type: 'bar',
+                    data: { labels: ['SÃO LUIS', 'BACABAL', 'BELÉM', 'MACAPÁ', 'TERESINA', 'SINOP', 'CUIABÁ', 'RONDONOPOLIS', 'PORTO VELHO', 'VILHENA'], datasets: [{ label: 'Quantidade de Itens', data: [100, 85, 120, 75, 90, 60, 80, 70, 65, 55], backgroundColor: '#3498db' }] },
+                    options: { responsive: true, maintainAspectRatio: false, scales: { y: { beginAtZero: true } } }
+                });
+
+                const historyCtx = document.getElementById('historyChart').getContext('2d');
+                historyChart = new Chart(historyCtx, {
+                    type: 'line',
+                    data: { labels: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez'], datasets: [{ label: 'Transferências Realizadas', data: [12, 19, 8, 15, 22, 18, 25, 12, 16, 20, 22, 18], borderColor: '#3498db', tension: 0.1, fill: false }] },
+                    options: { responsive: true, maintainAspectRatio: false, scales: { y: { beginAtZero: true } } }
+                });
+            }
+
+            // Simulação de carregamento inicial
             setTimeout(() => {
-                fileInfo.style.display = 'block';
                 fileName.textContent = 'estoque_filiais.csv';
+                fileInfo.style.display = 'block';
                 progressBar.style.width = '100%';
                 progressText.textContent = 'Arquivo processado com sucesso!';
                 analyzeBtn.disabled = false;
-                
-                // Perform initial analysis
-                analyzeStock();
             }, 1000);
         });
     </script>
+</body>
+</html>
